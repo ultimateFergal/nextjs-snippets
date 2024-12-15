@@ -49,6 +49,16 @@ export default async function SnippetShowPage(
   );
 }
 
+export async function generateStaticParams() {
+  const snippets = await db.snippet.findMany();
+
+  return snippets.map((snippets) => {
+    return {
+      id: snippets.id.toString(),
+    };
+  });
+}
+
 // Async Dynamic Params in Next.js 15
 // In the upcoming lecture, we will be adding code to fetch a single snippet. In Next.js 15 we must await params or searchParams before accessing.
 
